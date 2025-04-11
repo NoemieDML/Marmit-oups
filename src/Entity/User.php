@@ -6,11 +6,13 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -20,6 +22,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 180)]
     private ?string $email = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $name = null;
 
     /**
      * @var list<string> The user roles
@@ -51,17 +56,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Favory::class, mappedBy: 'User')]
     private Collection $favories;
 
-    #[ORM\ManyToOne(inversedBy: 'users')]
-    private ?Recette $recette = null;
 
-    #[ORM\ManyToOne(inversedBy: 'users')]
-    private ?Commentaire $commentaire = null;
+    /**
+     * @var Collection<int, Recette>
+     */
+    #[ORM\OneToMany(targetEntity: Recette::class, mappedBy: 'user')]
+    private Collection $recettes;
 
     public function __construct()
     {
         $this->likes = new ArrayCollection();
         $this->commentaires = new ArrayCollection();
         $this->favories = new ArrayCollection();
+        $this->recettes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -77,6 +84,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEmail(string $email): static
     {
         $this->email = $email;
+
+        return $this;
+    }
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): static
+    {
+        $this->name = $name;
 
         return $this;
     }
@@ -228,26 +246,32 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getRecette(): ?Recette
+    /**
+     * @return Collection<int, Recette>
+     */
+    public function getRecettes(): Collection
     {
-        return $this->recette;
+        return $this->recettes;
     }
 
-    public function setRecette(?Recette $recette): static
+    public function addRecette(Recette $recette): static
     {
-        $this->recette = $recette;
+        if (!$this->recettes->contains($recette)) {
+            $this->recettes->add($recette);
+            $recette->setUser($this);
+        }
 
         return $this;
     }
 
-    public function getCommentaire(): ?Commentaire
+    public function removeRecette(Recette $recette): static
     {
-        return $this->commentaire;
-    }
-
-    public function setCommentaire(?Commentaire $commentaire): static
-    {
-        $this->commentaire = $commentaire;
+        if ($this->recettes->removeElement($recette)) {
+            // set the owning side to null (unless already changed)
+            if ($recette->getUser() === $this) {
+                $recette->setUser(null);
+            }
+        }
 
         return $this;
     }

@@ -1,0 +1,55 @@
+{% extends 'base-admin.html.twig' %}
+
+{% block body %}
+
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Mes Recettes</h2>
+        <a href="{{ path('add_recette') }}" class="btn btn-success">
+            <i class='bx bxs-plus-circle'></i> Ajouter
+        </a>
+    </div>
+
+    <div class="row">
+        {% for recette in recette %}
+        <div class="col-12 col-md-6 col-lg-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">{{ recette.name }}</h5>
+                    <p class="card-text"><strong>#ID :</strong> {{ recette.id }}</p>
+                    <p class="card-text"><strong>Pour :</strong> {{ recette.nbrPersonne }} personne(s)</p>
+                    <p class="card-text"><strong>Temps :</strong> {{ recette.timePreparation }} min</p>
+                    <p class="card-text"><strong>Difficulté :</strong> {{ recette.difficulte }}</p>
+                    <p class="card-text"><strong>Description :</strong><br> {{ recette.description }}</p>
+                    <p class="card-text"><strong>Créée le :</strong> {{ recette.dateCreation|date('d/m/Y H:i') }}</p>
+
+                    <div class="mt-2">
+                        <strong>Ingrédients :</strong>
+                        {% for ingredient in recette.ingredients %}
+                        <div>🥄 {{ ingredient.name }}</div>
+                        {% else %}
+                        <div>Aucun ingrédient 😢</div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <a href="{{ path('remove_recette', {id:recette.id}) }}" class="text-danger">
+                        <i class='bx bx-trash'></i>
+                    </a>
+                    <a href="{{ path('recette_show', {'id' : recette.id}) }}" class="card-link"><i
+                            class='bx bxs-show'></i></a>
+                    <a href="{{ path('edit_recette', {'id': recette.id, 'name': recette.name}) }}" class="text-primary">
+                        <i class='bx bxs-edit-alt'></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="col-12">
+            <p class="text-muted">Aucune recette trouvée 🍽️</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

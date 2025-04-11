@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block footer %}
+
+<footer class="footer">
+
+    <div class="footer-container">
+        <p>&copy; 2025 MonSiteWeb. Tous droits réservés.</p>
+        <ul class="footer-links">
+            <li><a href="{{ path('index_home') }}">Accueil</a></li>
+            <li><a href="{{ path('app_recette') }}">Nos Recettes</a></li>
+            <li><a href="{{ path('index_home') }}">Mes favoris</a></li>
+            <li><a href="{{ path('add_recette') }}">Mon profil</a></li>
+        </ul>
+    </div>
+
+</footer>
+{% endblock %}

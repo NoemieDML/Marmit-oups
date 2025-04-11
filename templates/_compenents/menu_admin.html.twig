@@ -1,0 +1,23 @@
+<div class="d-flex flex-column flex-shrink-0 p-3">
+    <span class="fs-4">Sidebar</span>
+    <ul class="nav nav-pills flex-column mb-auto">
+        <li class="nav-item">
+            <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none"
+                aria-current="page" href="{{ path('index_home') }}">Accueil</a>
+        </li>
+        <li class="nav-item">
+            <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none"
+                href="{{ path('app_recette') }}">Nos recettes</a>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none"
+                href="{{ path('app_ingredien') }}">
+                Ingredients
+            </a>
+        <li class="nav-item">
+            <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none"
+                href="{{ path('app_recette') }}">User</a>
+        </li>
+    </ul>
+    <hr>
+</div>

@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{% include '_compenents/header.html.twig' %}
+
+<h1 class="text-center my-4">Voici le Produit Souhaité</h1>
+
+<div class="d-flex justify-content-center align-items-center">
+    <div class="card shadow rounded-4" style="width: 32rem;">
+        <img src="{{ asset(recette.img) }}" class="card-img-top rounded-top-4 object-fit-cover" style="height: 16rem;"
+            alt="{{ recette.name }}">
+
+        <div class="card-body">
+            <h5 class="card-title fw-bold text-primary">{{ recette.name }}</h5>
+            <p class="card-text text-muted">{{ recette.description }}</p>
+        </div>
+
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"><strong>Nombre de personnes :</strong> {{ recette.nbrPersonne }}</li>
+            <li class="list-group-item"><strong>Difficulté :</strong> {{ recette.difficulte }}</li>
+            <li class="list-group-item"><strong>Temps de préparation :</strong> {{ recette.timePreparation}}</li>
+            <li class="list-group-item"><strong>Préparation :<br> <br> </strong> {{ recette.etapePreparation }}</li>
+            <li class="list-group-item"><strong>Auteur :</strong> {{ recette.user.name }}</li>
+            <li class="list-group-item"><strong>Créer le :</strong> {{ recette.dateCreation|date('d/m/Y H:i') }}</li>
+        </ul>
+    </div>
+</div>
+
+
+<br>
+
+
+{% endblock %}

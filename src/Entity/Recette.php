@@ -64,11 +64,18 @@ class Recette
     #[ORM\OneToMany(targetEntity: Favory::class, mappedBy: 'recette')]
     private Collection $favories;
 
-    /**
-     * @var Collection<int, User>
-     */
-    #[ORM\OneToMany(targetEntity: User::class, mappedBy: 'recette')]
-    private Collection $users;
+
+    #[ORM\Column(length: 999999999999)]
+    private ?string $description = null;
+
+    #[ORM\Column(length: 999999999999999999)]
+    private ?string $etapePreparation = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $name = null;
+
+    #[ORM\ManyToOne(inversedBy: 'recettes')]
+    private ?User $user = null;
 
     public function __construct()
     {
@@ -77,7 +84,6 @@ class Recette
         $this->ingredients = new ArrayCollection();
         $this->categories = new ArrayCollection();
         $this->favories = new ArrayCollection();
-        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -304,32 +310,51 @@ class Recette
         return $this;
     }
 
-    /**
-     * @return Collection<int, User>
-     */
-    public function getUsers(): Collection
+
+    public function getDescription(): ?string
     {
-        return $this->users;
+        return $this->description;
     }
 
-    public function addUser(User $user): static
+    public function setDescription(string $description): static
     {
-        if (!$this->users->contains($user)) {
-            $this->users->add($user);
-            $user->setRecette($this);
-        }
+        $this->description = $description;
 
         return $this;
     }
 
-    public function removeUser(User $user): static
+    public function getEtapePreparation(): ?string
     {
-        if ($this->users->removeElement($user)) {
-            // set the owning side to null (unless already changed)
-            if ($user->getRecette() === $this) {
-                $user->setRecette(null);
-            }
-        }
+        return $this->etapePreparation;
+    }
+
+    public function setEtapePreparation(string $etapePreparation): static
+    {
+        $this->etapePreparation = $etapePreparation;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): static
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }

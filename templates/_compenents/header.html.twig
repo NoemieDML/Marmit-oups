@@ -1,0 +1,36 @@
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description"
+        content="Découvrez Marmit'Oups, un site rempli de recettes simples et savoureuses : entrées, plats, desserts et apéros pour tous les goûts !">
+    <meta name="keywords" content="recette, cuisine, entrée, plat, dessert, apéro, facile, rapide, Marmit'Oups">
+    <meta name="author" content="CrocStitch">
+    <meta name="language" content="fr">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/styles/style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+    <title>Marmit'oups</title>
+
+</head>
+{# /assets/img/Marmit'Oups.png #}
+
+<header>
+
+    <nav>
+        <img src="{{ asset('/img/Marmit\'Oups.png') }}" alt="stitch en cuisine">
+        <div class="onglets">
+            <a href="{{ path('index_home') }}">Accueil</a>
+            <a href="{{ path('app_recette') }}">Nos Recettes</a>
+            <a href="{{ path('index_home') }}">Mes favoris</a>
+            <a href="{{ path('recette_user') }}">Mon profil</a>
+            <a href="{{ path('app_register') }}">Me connecter/s'inscrire</a>
+            <a href="{{ path('app_logout') }}">Ce déconnecter</a>
+            <a href="{{ path('app_admin') }}">Admin</a>
+        </div>
+    </nav>
+
+</header>
+
+</html>

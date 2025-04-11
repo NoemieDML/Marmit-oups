@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{% include '_compenents/header.html.twig' %}
+
+<main>
+    <div class="slider">
+
+        <div class="hautSlide">
+            <h1>Marmit'oups</h1>
+            <h4>LES MEILLEURES RECETTES DU MONDE GALACTIQUE.</h4>
+            <button>Parcourir</button>
+        </div>
+
+        <figure>
+
+            <div class="slide">
+                <img src="{{ asset('/img/1.png') }}" alt="">
+            </div>
+            <div class="slide">
+                <img src="{{ asset('/img/2.png') }}" alt="">
+            </div>
+            <div class="slide">
+                <img src="{{ asset('/img/3.png') }}" alt="">
+            </div>
+            <div class="slide">
+                <img src="{{ asset('/img/4.png') }}" alt="">
+
+            </div>
+        </figure>
+
+
+    </div>
+</main>
+
+
+<section class="marmitoups">
+    <h2>🍽️ Qu’est-ce que <span>Marmit’oups</span> ?</h2>
+    <p>Bienvenue sur <strong>Marmit’oups</strong>, le repaire culinaire préféré de <strong>Stitch</strong>, le petit
+        alien qui met le <em>chaos</em> partout… même en cuisine ! 😅</p>
+
+    <ul>
+        <li>🍕 Pizza brûlée ? <strong>Marmit’oups !</strong></li>
+        <li>🧁 Muffins explosifs ? <strong>Marmit’oups !</strong></li>
+        <li>🥞 Crêpes collées au plafond ? Devine quoi... <strong>Marmit’oups !</strong></li>
+    </ul>
+
+    <p>Mais entre deux maladresses, Stitch sait aussi préparer de vraies pépites 💫.<br>
+        Publie tes recettes, commente celles des autres, et partage tes ratés avec humour !</p>
+
+    <p class="signature">Parce qu’ici, chaque <strong>"oups"</strong> est une aventure culinaire en plus ! 😋</p>
+</section>
+
+
+{% include '_compenents/footer.html.twig' %}
+
+{% endblock %}

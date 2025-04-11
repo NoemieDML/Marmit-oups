@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{% include '_compenents/header.html.twig' %}
+{{ form_start(form) }}
+<div class="form-container">
+    <h2>S'inscrire/se connecter</h2>
+
+    {{ form_row(form.email) }}
+    {{ form_row(form.plainPassword) }}
+    <div class="checkbox-wrapper">
+        {{ form_widget(form.agreeTerms) }}
+        {{ form_label(form.agreeTerms) }}
+    </div>
+    <button type="submit">S'inscrire</button>
+    {{ form_end(form) }}
+</div>
+
+<button type="submit">Soumettre</button>
+{% endblock %}

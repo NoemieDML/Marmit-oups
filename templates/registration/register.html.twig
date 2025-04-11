@@ -1,24 +1,37 @@
-{# templates/security/login.html.twig #}
+{# templates/registration/register.html.twig #}
 {% extends 'base.html.twig' %}
 
 {% block body %}
 <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
     <div class="card shadow p-4" style="width: 100%; max-width: 400px;">
-        <h2 class="text-center mb-4">🔑 Connexion</h2>
+        <h2 class="text-center mb-4">📝 Inscription</h2>
 
         {{ form_start(form) }}
         <div class="mb-3">
             {{ form_label(form.email) }}
             {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
         </div>
+
+        <div class="mb-3">
+            {{ form_label(form.name) }}
+            {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
         <div class="mb-3">
             {{ form_label(form.plainPassword) }}
             {{ form_widget(form.plainPassword, {'attr': {'class': 'form-control'}}) }}
         </div>
+
+        <div class="form-check mb-3">
+            {{ form_widget(form.agreeTerms, {'attr': {'class': 'form-check-input'}}) }}
+            {{ form_label(form.agreeTerms, null, {'label_attr': {'class': 'form-check-label'}}) }}
+        </div>
+
+        <button class="btn btn-success w-100">S'inscrire</button>
         {{ form_end(form) }}
 
         <div class="text-center mt-3">
-            <a href="{{ path('app_register') }}">Pas encore de compte ? Inscris-toi ici</a>
+            <a href="{{ path('app_login') }}">Déjà inscrit ? Connecte-toi</a>
         </div>
     </div>
 </div>

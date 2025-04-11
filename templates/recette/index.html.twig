@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{% include '_compenents/header.html.twig' %}
+
+<div class="container-fluid">
+
+    <div class="row">
+        {% for recette in recette %}
+        <div class="col-lg-3 col-md-4 mb-3">
+
+
+            <div class="card h-100">
+                <img src="{{ asset(recette.img) }}" class="card-img-top object-fit-cover" style="height: 8rem;"
+                    alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{ recette.name}}</h5>
+
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">{{ recette.timePreparation}}min</li>
+                    <li class="list-group-item">Nombre de personne : {{ recette.nbrPersonne}}</li>
+                    <li class="list-group-item">Difficulter :{{ recette.difficulte}}</li>
+                </ul>
+                <div class="card-body">
+                    <a href="{{ path('recette_show', {'id' : recette.id}) }}" class="card-link"><i
+                            class='bx bxs-show'></i></a>
+                    <a href="#"><i class='bx bx-star'></i></a>
+                    <a href="#"><i class='bx bx-heart'></i></i></a>
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+    </div>
+</div>
+{% include '_compenents/footer.html.twig' %}
+{% endblock %}
